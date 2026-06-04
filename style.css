@@ -1,0 +1,312 @@
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dce9f5;
+  font-family: 'Inter', sans-serif;
+}
+ 
+.scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+ 
+.card-wrapper {
+  width: 420px;
+  height: 260px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+ 
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+ 
+.card-wrapper:hover .card-inner {
+  transform: rotateY(180deg);
+}
+ 
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #121212;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  padding: 1.6rem 1.8rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+ 
+.waves-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260'%3E%3Cdefs%3E%3Cfilter id='blur'%3E%3CfeGaussianBlur stdDeviation='1'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.07' filter='url(%23blur)'%3E%3Cpath d='M-20 40 Q60 20 140 50 Q220 80 300 45 Q380 10 460 40'/%3E%3Cpath d='M-20 60 Q60 40 140 70 Q220 100 300 65 Q380 30 460 60'/%3E%3Cpath d='M-20 80 Q60 55 140 90 Q220 120 300 85 Q380 50 460 80'/%3E%3Cpath d='M-20 100 Q60 75 140 110 Q220 140 300 105 Q380 70 460 100'/%3E%3Cpath d='M-20 120 Q60 95 140 130 Q220 160 300 125 Q380 90 460 120'/%3E%3Cpath d='M-20 140 Q60 115 140 150 Q220 180 300 145 Q380 110 460 140'/%3E%3Cpath d='M-20 160 Q60 135 140 170 Q220 200 300 165 Q380 130 460 160'/%3E%3Cpath d='M-20 180 Q60 155 140 190 Q220 220 300 185 Q380 150 460 180'/%3E%3Cpath d='M-20 200 Q60 175 140 210 Q220 240 300 205 Q380 170 460 200'/%3E%3Cpath d='M-20 220 Q60 195 140 230 Q220 260 300 225 Q380 190 460 220'/%3E%3Cpath d='M-20 240 Q60 215 140 250 Q220 280 300 245 Q380 210 460 240'/%3E%3Cpath d='M-20 20 Q70 0 150 30 Q230 60 310 25 Q390 -10 460 20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+ 
+.card-face > *:not(.waves-bg) {
+  position: relative;
+  z-index: 1;
+}
+ 
+.front-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: auto;
+}
+ 
+.mc-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.mc-circles {
+  display: flex;
+  align-items: center;
+}
+ 
+.mc-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+ 
+.mc-circles.small .mc-circle {
+  width: 26px;
+  height: 26px;
+}
+ 
+.mc-red {
+  background: #eb001b;
+}
+ 
+.mc-orange {
+  background: #f79e1b;
+  margin-left: -15px;
+  mix-blend-mode: screen;
+}
+ 
+.mc-circles.small .mc-orange {
+  margin-left: -10px;
+}
+ 
+.mc-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+ 
+.chip {
+  width: 52px;
+  height: 42px;
+  background: linear-gradient(135deg, #c8922a 0%, #e8c060 25%, #b87820 50%, #dba840 75%, #c09030 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+}
+ 
+.chip-body {
+  width: 36px;
+  height: 28px;
+  position: relative;
+  border: 1.5px solid rgba(100, 60, 0, 0.4);
+  border-radius: 4px;
+}
+ 
+.chip-line {
+  position: absolute;
+  background: rgba(100, 60, 0, 0.35);
+}
+ 
+.chip-line.h {
+  width: 100%;
+  height: 1.5px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+ 
+.chip-line.v {
+  width: 1.5px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+ 
+.chip-center {
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  background: rgba(120, 80, 0, 0.2);
+  border: 1px solid rgba(100, 60, 0, 0.3);
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ 
+
+.front-middle {
+  margin-bottom: 1rem;
+}
+ 
+.card-number-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+ 
+.card-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+}
+ 
+
+.front-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+ 
+.card-holder {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.04em;
+}
+ 
+.valid-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+ 
+.valid-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.08em;
+}
+ 
+.valid-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+}
+ 
+
+.card-back {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  padding: 0;
+}
+ 
+.card-back .waves-bg {
+  opacity: 0.6;
+}
+ 
+.magnetic-strip {
+  width: 100%;
+  height: 50px;
+  background: #000;
+  margin-top: 1.4rem;
+  margin-bottom: 1.4rem;
+  flex-shrink: 0;
+}
+ 
+.cvv-area {
+  padding: 0 1.8rem;
+  margin-bottom: 0.4rem;
+}
+ 
+.cvv-tape {
+  background: #f5f5f0;
+  border-radius: 4px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  margin-bottom: 5px;
+}
+ 
+.cvv-dots {
+  font-size: 13px;
+  color: #555;
+  letter-spacing: 0.15em;
+  font-style: italic;
+}
+ 
+.cvv-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 15px;
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+ 
+.cvv-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+ 
+.back-footer {
+  margin-top: auto;
+  padding: 0 1.8rem 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+ 
+.back-info {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.6;
+  max-width: 240px;
+}
+ 
+
+.hint {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+ 
